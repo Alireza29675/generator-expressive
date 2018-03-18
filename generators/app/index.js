@@ -48,13 +48,28 @@ module.exports = class extends Generator {
 
   writing() {
 
-    let templatePath = 'basic/';
-
     this.fs.copyTpl(
-      this.templatePath(templatePath),
+      this.templatePath('basic/'),
       this.destinationPath(`${this.props.dist}/`),
       this.props
     );
+
+    if (this.props.withReact) {
+      this.fs.copyTpl(
+        this.templatePath('withReact/'),
+        this.destinationPath(`${this.props.dist}/`),
+        this.props
+      );
+    }
+
+    if (this.props.withSass) {
+      this.fs.copyTpl(
+        this.templatePath('withSass/'),
+        this.destinationPath(`${this.props.dist}/`),
+        this.props
+      );
+    }
+
   }
 
 };

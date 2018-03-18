@@ -21,6 +21,8 @@
   "devDependencies": {
     <% if (withReact) { %>
     "babel-preset-react": "^6.24.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     <% } %>
     <% if (withSass) { %>
     "css-loader": "^0.28.11",
