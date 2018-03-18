@@ -39,7 +39,8 @@ module.exports = class extends Generator {
     ];
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
+      props.year = (new Date()).getFullYear();
+      props.packageName = props.name.toLowerCase().split(' ').join('-');
       props.dist = props.name === this.appname ? '.' : props.name;
       this.props = props;
     });
