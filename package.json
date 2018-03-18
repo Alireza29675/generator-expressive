@@ -1,12 +1,11 @@
 {
   "name": "generator-expressive",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Express/ES6/React/Socket.io Application Generator",
-  "homepage": "",
   "author": {
     "name": "Alireza Sheikholmolouki",
     "email": "alireza.sheikholmolouki@gmail.com",
-    "url": "alireza.sheikholmolouki.com"
+    "url": "https://alireza.sheikholmolouki.com"
   },
   "files": [
     "generators"
