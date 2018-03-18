@@ -1,0 +1,33 @@
+{
+  "name": "generator-expressive",
+  "version": "0.1.0",
+  "description": "Express/ES6/React/Socket.IO Application Generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "generators"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alireza29675/generator-expressive.git"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "express",
+    "es6",
+    "webpack",
+    "react",
+    "socket.io"
+  ],
+  "author": "Alireza Sheikholmolouki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alireza29675/generator-expressive/issues"
+  },
+  "homepage": "https://github.com/Alireza29675/generator-expressive#readme",
+  "dependencies": {
+    "yeoman-generator": "^2.0.3"
+  }
+}
