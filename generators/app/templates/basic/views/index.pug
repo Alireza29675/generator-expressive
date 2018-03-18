@@ -1,4 +1,9 @@
 extends layout
 
 block content
-  #app
+  <% if (withReact) { %>
+  #react-target
+  <% } else { %>
+  h1 Welcome to #{title}!
+  <% } %>
+

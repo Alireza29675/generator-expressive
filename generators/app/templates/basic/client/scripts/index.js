@@ -1,3 +1,10 @@
-const message = `It works!`
+<% if (withReact) { %>
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-document.body.innerHTML = `<h1>${ message }</h1>`
+import App from './components/App'
+
+ReactDOM.render(<App />, document.querySelector('.react-target'));
+<% } else { %>
+console.log('It works!');
+<% } %>
