@@ -79,6 +79,12 @@
       "prettier"
     ]
   },
-  "repository": "Alireza29675/generator-expressive",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alireza29675/generator-expressive.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Alireza29675/generator-expressive/issues"
+  },
   "license": "MIT"
 }
