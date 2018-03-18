@@ -3,6 +3,22 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
+const finalMessage = (dist) => chalk`
+*-------------------------------------*
+|                                     |
+|  {cyan Expressive} installed successfuly!  |
+|  {gray you can start using by running:}    |
+|                                     |
+|  {bgCyan.black  ${''.padEnd(31, ' ')} }  |
+|  {bgCyan.black  ${(' cd ' + dist + '/').padEnd(31, ' ')} }  |
+|  {bgCyan.black  ${(' npm install').padEnd(31, ' ')} }  |
+|  {bgCyan.black  ${(' npm run bundle').padEnd(31, ' ')} }  |
+|  {bgCyan.black  ${(' npm start').padEnd(31, ' ')} }  |
+|  {bgCyan.black  ${''.padEnd(31, ' ')} }  |
+|                                     |
+*-------------------------------------*
+`
+
 module.exports = class extends Generator {
 
   prompting() {
@@ -69,6 +85,10 @@ module.exports = class extends Generator {
         this.props
       );
     }
+
+    setTimeout(() => {
+      this.log(finalMessage(this.props.dist))
+    }, 200)
 
   }
 
