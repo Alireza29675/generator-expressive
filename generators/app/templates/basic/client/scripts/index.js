@@ -1,5 +1,4 @@
-<% if (withReact) { %>
-import React from 'react'
+<% if (withReact) { %>import React from 'react'
 import ReactDOM from 'react-dom'
 
 import App from './components/App'

@@ -44,12 +44,17 @@ module.exports = class extends Generator {
       }, {
         type    : 'confirm',
         name    : 'withSass',
-        message : 'Would you like to initialize Sass?',
+        message : 'Would you like to use Sass?',
         default : true
       }, {
         type    : 'confirm',
         name    : 'withReact',
-        message : 'Would you like to initialize React.js?',
+        message : 'Would you like to use React.js?',
+        default : true
+      }, {
+        type    : 'confirm',
+        name    : 'withSocket',
+        message : 'Would you like to use Socket.io?',
         default : true
       }
     ];
@@ -81,6 +86,14 @@ module.exports = class extends Generator {
     if (this.props.withSass) {
       this.fs.copyTpl(
         this.templatePath('withSass/'),
+        this.destinationPath(`${this.props.dist}/`),
+        this.props
+      );
+    }
+
+    if (this.props.withSocket) {
+      this.fs.copyTpl(
+        this.templatePath('withSocket/'),
         this.destinationPath(`${this.props.dist}/`),
         this.props
       );
