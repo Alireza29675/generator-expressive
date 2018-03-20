@@ -4,6 +4,9 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const PrettyError = require('pretty-error');
+
+const pe = new PrettyError;
 
 const index = require('./routes/index');
 
@@ -31,6 +34,10 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+
+  // rendering errors by Pretty-Error
+  console.log('\n' + pe.render(err));
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -39,5 +46,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+pe.skipNodeFiles();
+pe.skipPackage('express');
 
 module.exports = app;
