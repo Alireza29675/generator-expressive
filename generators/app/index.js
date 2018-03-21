@@ -3,6 +3,9 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
+const { exec } = require('child_process');
+const githubUsername = require('github-username');
+
 const finalMessage = (dist) => chalk`
 *-------------------------------------*
 |                                     |
@@ -18,6 +21,21 @@ const finalMessage = (dist) => chalk`
 |                                     |
 *-------------------------------------*
 `
+
+let userGithubUsername = '';
+
+exec('git config --global user.email', (err, stdout, stderr) => {
+
+  if (err || stderr) return;
+  const email = stdout.trim();
+
+  if (!(/\S+@\S+\.\S+/).test(email)) return;
+
+  githubUsername(email).then(username => {
+    userGithubUsername = username;
+  }).catch(e => {});
+
+})
 
 module.exports = class extends Generator {
 
@@ -42,6 +60,11 @@ module.exports = class extends Generator {
         name    : 'author',
         message : 'What is the author\'s name?',
       }, {
+        type    : 'input',
+        name    : 'author',
+        message : 'What is your Github username?',
+        default : () => userGithubUsername
+      }, {
         type    : 'checkbox',
         name    : 'technologies',
         message : 'What technologies do you want to use?',
@@ -62,6 +85,12 @@ module.exports = class extends Generator {
           value: 'withMongoose',
           checked: true
         }]
+      }, {
+        when: prev => prev.technologies.includes('withMongoose'),
+        type: 'input',
+        name: 'dbname',
+        message: 'What is your MongoDB\'s database name?',
+        default: prev => prev.name.toLowerCase().split(' ').join('-')
       }
     ];
 
@@ -73,21 +102,7 @@ module.exports = class extends Generator {
       props.year = (new Date()).getFullYear();
       props.packageName = props.name.toLowerCase().split(' ').join('-');
       props.dist = props.name === this.appname ? '.' : props.name;
-
-      // if it was with mongoose generator will asks dbname
-      if (withMongoose) {
-        this.prompt([{
-          type    : 'input',
-          name    : 'dbname',
-          message : 'What is your MongoDB\'s database name?',
-          default : props.packageName
-        }]).then(mongooseProps => {
-          props.dbname = mongooseProps.dbname;
-          this.props = props;
-        })
-      } else {
-        this.props = props;
-      }
+      this.props = props;
     });
   }
 

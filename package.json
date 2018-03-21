@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "chalk": "^2.1.0",
+    "github-username": "^4.1.0",
     "yeoman-generator": "^2.0.1",
     "yosay": "^2.0.1"
   },
