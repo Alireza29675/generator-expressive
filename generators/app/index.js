@@ -52,7 +52,7 @@ module.exports = class extends Generator {
         }, {
           name: 'React.js',
           value: 'withReact',
-          checked: true
+          checked: false
         }, {
           name: 'Socket.io',
           value: 'withSocket',
@@ -73,7 +73,21 @@ module.exports = class extends Generator {
       props.year = (new Date()).getFullYear();
       props.packageName = props.name.toLowerCase().split(' ').join('-');
       props.dist = props.name === this.appname ? '.' : props.name;
-      this.props = props;
+
+      // if it was with mongoose generator will asks dbname
+      if (withMongoose) {
+        this.prompt([{
+          type    : 'input',
+          name    : 'dbname',
+          message : 'What is your MongoDB\'s database name?',
+          default : props.packageName
+        }]).then(mongooseProps => {
+          props.dbname = mongooseProps.dbname;
+          this.props = props;
+        })
+      } else {
+        this.props = props;
+      }
     });
   }
 
