@@ -61,7 +61,7 @@ module.exports = class extends Generator {
         message : 'What is the author\'s name?',
       }, {
         type    : 'input',
-        name    : 'author',
+        name    : 'github',
         message : 'What is your Github username?',
         default : () => userGithubUsername
       }, {

@@ -9,7 +9,13 @@
     "bundle": "webpack",
     "bundle:watch": "webpack --watch"
   },
+  "author": "<%= author %>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<%= github %>/<%= packageName %>.git"
+  },
   "dependencies": {
+    <% if (withMongoose) { %>"mongoose": "^4.12.1",<% } %>
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -41,5 +47,9 @@
     "nodemon": "^1.17.2",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/<%= github %>/<%= packageName %>/issues"
+  },
+  "homepage": "https://github.com/<%= github %>/<%= packageName %>#readme",
 }
