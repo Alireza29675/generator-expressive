@@ -42,24 +42,34 @@ module.exports = class extends Generator {
         name    : 'author',
         message : 'What is the author\'s name?',
       }, {
-        type    : 'confirm',
-        name    : 'withSass',
-        message : 'Would you like to use Sass?',
-        default : true
-      }, {
-        type    : 'confirm',
-        name    : 'withReact',
-        message : 'Would you like to use React.js?',
-        default : true
-      }, {
-        type    : 'confirm',
-        name    : 'withSocket',
-        message : 'Would you like to use Socket.io?',
-        default : true
+        type    : 'checkbox',
+        name    : 'technologies',
+        message : 'What technologies do you want to use?',
+        choices: [{
+          name: 'Sass',
+          value: 'withSass',
+          checked: true
+        }, {
+          name: 'React.js',
+          value: 'withReact',
+          checked: true
+        }, {
+          name: 'Socket.io',
+          value: 'withSocket',
+          checked: true
+        }, {
+          name: 'Mongoose (MongoDB + ORM)',
+          value: 'withMongoose',
+          checked: true
+        }]
       }
     ];
 
     return this.prompt(prompts).then(props => {
+      props.withSass = props.technologies.includes('withSass')
+      props.withReact = props.technologies.includes('withReact')
+      props.withSocket = props.technologies.includes('withSocket')
+      props.withMongoose = props.technologies.includes('withMongoose')
       props.year = (new Date()).getFullYear();
       props.packageName = props.name.toLowerCase().split(' ').join('-');
       props.dist = props.name === this.appname ? '.' : props.name;
@@ -94,6 +104,14 @@ module.exports = class extends Generator {
     if (this.props.withSocket) {
       this.fs.copyTpl(
         this.templatePath('withSocket/'),
+        this.destinationPath(`${this.props.dist}/`),
+        this.props
+      );
+    }
+
+    if (this.props.withMongoose) {
+      this.fs.copyTpl(
+        this.templatePath('withMongoose/'),
         this.destinationPath(`${this.props.dist}/`),
         this.props
       );
